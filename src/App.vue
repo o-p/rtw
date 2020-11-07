@@ -1,22 +1,49 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <b-container id="app">
+    <Hall
+      @enter="onEnterChannel"
+      @error="error => this.$bvToast.toast(error, { variant: 'danger '})"
+    />
+  </b-container>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
+import Hall from './components/Hall.vue';
+import store from './store';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
+    Hall,
+  },
+  store,
+  data() {
+    return {
+      channels: [],
+    };
+  },
+  mounted() {
+
+  },
+  methods: {
+    onEnterChannel(channel) {
+      this.$bvToast.toast(`Joined Channel "${channel.name}" (${channel.uid})`, {
+        variant: 'success',
+      });
+    },
+    onEnterFailure(error) {
+      this.$bvToast.toast(error.message || error, {
+        title: 'Join Channel Failure',
+        variant: 'danger',
+      });
+    },
   },
 };
 </script>
 
 <style lang="scss">
+@import 'assets/world.scss';
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

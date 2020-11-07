@@ -1,0 +1,38 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 100 100"
+  width="1000"
+  height="1000"
+  fill="none"
+>
+  <g>
+    <circle cx="50" cy="90" r="33" fill="url(#A)" />
+    <circle cx="50" cy="90" r="23" fill="url(#B)" />
+    <circle cx="50" cy="90" r="13" fill="url(#C)" />
+  </g>
+  <defs>
+    <linearGradient
+      id="A"
+      gradientTransform="rotate(-31.64)"
+    >
+      <stop offset="17%" stop-color="#e24eb0" stop-opacity=".2" />
+      <stop offset="84.7%" stop-color="#4b44eb" stop-opacity=".2" />
+    </linearGradient>
+
+    <linearGradient
+      id="B"
+      gradientTransform="translate(0.5 -0.25) rotate(130.53)"
+    >
+      <stop offset="19.66%" stop-color="#e24eb0" stop-opacity=".2" />
+      <stop offset="68.77%" stop-color="#4b44eb" stop-opacity=".2" />
+    </linearGradient>
+
+    <linearGradient
+      id="C"
+      gradientTransform="translate(0.75 0.75) rotate(216.11)"
+    >
+      <stop offset="21%" stop-color="#e24eb0" stop-opacity=".2" />
+      <stop offset="80%" stop-color="#4b44eb" stop-opacity=".2" />
+    </linearGradient>
+  </defs>
+</svg>
