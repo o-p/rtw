@@ -1,42 +1,57 @@
 <template>
-  <b-modal
-    :visible="!hasConnected"
-    ok-only
-    ok-title="JOIN"
-    no-close-on-backdrop
-    no-close-on-esc
-    @ok="establish"
-  >
-    <form
-      class="pt-3"
-      @submit.stop.prevent="establish"
+  <b-row class="hall">
+    <b-col
+      class="pt-5 text-left"
+      offset="3"
+      cols="6"
     >
-      <b-form-group
-        label="APP ID"
-        label-cols="3"
-      >
-        <b-form-input
-          v-model="appId"
-          required
-        />
-      </b-form-group>
-      <b-form-group
-        label="Channel Name"
-        label-cols="3"
-      >
-        <b-form-input
-          v-model="channelName"
-          required
-        />
-      </b-form-group>
-      <b-form-group
-        label="Token"
-        label-cols="3"
-      >
-        <b-form-input v-model="token" />
-      </b-form-group>
-    </form>
-  </b-modal>
+      <b-card title="Connection Settings">
+        <form
+          class="pt-3"
+          @submit.stop.prevent="establish"
+        >
+          <b-form-group
+            label="APP ID"
+            label-cols="3"
+          >
+            <b-form-input
+              v-model="appId"
+              :readonly="readonly"
+            />
+          </b-form-group>
+          <b-form-group
+            label="Channel Name"
+            label-cols="3"
+          >
+            <b-form-input
+              v-model="channelName"
+              :readonly="readonly"
+            />
+          </b-form-group>
+          <b-form-group
+            label="Token"
+            label-cols="3"
+          >
+            <b-form-input
+              v-model="token"
+              :readonly="readonly"
+            />
+          </b-form-group>
+          <b-form-group
+            class="text-right mt-3 mb-0"
+          >
+            <b-button
+              variant="primary"
+              :disabled="readonly"
+              @click="establish"
+            >
+              Connect
+            </b-button>
+          </b-form-group>
+        </form>
+      </b-card>
+    </b-col>
+  </b-row>
 </template>
 
 <script>
@@ -49,27 +64,34 @@ export default {
   store,
   data() {
     return {
-      appId: '67efc4ba0e964676bac899637f38de70',
-      channelName: 'challenge',
-      token: '00667efc4ba0e964676bac899637f38de70IADPkLL7xRtoze75oBa0gdcDDo7INlIosXF3dGk9K0A6CVGJCdcAAAAAEABqf2ZwBvKnXwEAAQAG8qdf',
+      appId: '',
+      channelName: '',
+      token: '',
     };
   },
   computed: {
     ...mapGetters({
-      hasConnected: 'Connection/established',
+      connection: 'Connection/state',
     }),
+    readonly() {
+      return this.connection !== 'DISCONNECTED';
+    },
   },
   methods: {
     ...mapActions({
-      restart: 'Connection/restart',
+      initLocalStream: 'Connection/createStream',
       join: 'Connection/joinChannel',
+      restart: 'Connection/restart',
     }),
     async establish() {
       const { appId, channelName, token } = this;
       return this.restart(appId)
         .then(() => this.join({ channelName, token }))
-        .then((channel) => this.$emit('enter', channel))
-        .catch((err) => this.$emit('error', err));
+        .then((channel) => {
+          this.$emit('info', `Joined Channel "${channel.name}"`);
+          return this.initLocalStream({ streamID: channel.uid });
+        })
+        .catch((err) => this.$emit('error', err.message || err));
     },
   },
 };
