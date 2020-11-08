@@ -1,15 +1,19 @@
 <template>
   <b-row class="dressing-room">
     <b-col
-      class="pt-3 text-left"
-      offset="3"
-      cols="6"
+      class="pt-3 text-center"
+      offset="2"
+      cols="8"
     >
-      <b-card title="Preapre to Join" variant="warning">
-        <player
-          v-if="stream"
-          :stream="stream"
-        />
+      <b-card title="Preapre to Join">
+        <b-row>
+          <b-col />
+          <player
+            v-if="stream"
+            :stream="stream"
+          />
+          <b-col />
+        </b-row>
         <b-card-body class="text-center">
           <b-button
             v-if="isVideoOn"

@@ -16,16 +16,13 @@
       </b-col>
     </b-row>
     <b-row>
-      <b-col
-        cols="4"
-        offset="4"
-      >
-        <stream-player
-          :stream="local"
-          :width="640"
-          :height="480"
-        />
-      </b-col>
+      <b-col />
+      <stream-player
+        :stream="local"
+        :width="640"
+        :height="480"
+      />
+      <b-col />
     </b-row>
   </div>
 </template>

@@ -49,17 +49,6 @@ export default {
 
   },
   methods: {
-    onEnterChannel(channel) {
-      this.$bvToast.toast(`Joined Channel "${channel.name}" (${channel.uid})`, {
-        variant: 'success',
-      });
-    },
-    onEnterFailure(error) {
-      this.$bvToast.toast(error.message || error, {
-        title: 'Join Channel Failure',
-        variant: 'danger',
-      });
-    },
     showError(message) {
       this.$bvToast.toast(message, {
         variant: 'danger',

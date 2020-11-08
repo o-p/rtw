@@ -1,10 +1,13 @@
 <template>
   <div
     :id="playerId"
-    :style="{ width: `${width}px`, height: `${height}px` }"
+    :style="{
+      width: `${width}px`,
+      height: `${height}px`,
+      background: '#C00',
+    }"
     class="stream-player"
-  >
-  </div>
+  />
 </template>
 
 <script>
@@ -29,7 +32,7 @@ export default {
   },
   methods: {
     redraw() {
-      if (this.stream && !this.stream.isPlaying()) {
+      if (this.stream) {
         this.stream.play(this.playerId, { fit: 'cover' }, (err) => {
           console.log(err);
         });
