@@ -14,9 +14,8 @@
 <script>
 import { mapGetters } from 'vuex';
 
-import DressingRoom from './components/DressingRoom.vue';
-import Hall from './components/Hall.vue';
 import MeetingRoom from './components/MeetingRoom.vue';
+import Hall from './components/Hall.vue';
 import store from './store';
 
 export default {
@@ -36,10 +35,6 @@ export default {
       const { connection } = this;
       if (connection !== 'CONNECTED') {
         return Hall;
-      }
-
-      if (!this.published) {
-        return DressingRoom;
       }
 
       return MeetingRoom;

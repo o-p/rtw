@@ -4,9 +4,10 @@
     :style="{
       width: `${width}px`,
       height: `${height}px`,
-      background: '#C00',
+      background: '#CCC',
     }"
     class="stream-player"
+    @click.once="redraw"
   />
 </template>
 
@@ -14,6 +15,7 @@
 export default {
   name: 'StreamPlayer',
   props: {
+    autoplay: { type: Boolean, default: false },
     stream: { type: Object, required: true },
     width: { type: Number, default: 640 },
     height: { type: Number, default: 480 },
@@ -24,7 +26,9 @@ export default {
     },
   },
   mounted() {
-    this.$nextTick(this.redraw);
+    if (this.autoplay) {
+      this.$nextTick(this.redraw);
+    }
   },
   beforeDestroy() {
     this.stream.stop();
@@ -32,10 +36,8 @@ export default {
   },
   methods: {
     redraw() {
-      if (this.stream) {
-        this.stream.play(this.playerId, { fit: 'cover' }, (err) => {
-          console.log(err);
-        });
+      if (!this.stream.isPlaying()) {
+        this.stream.play(this.playerId, { fit: 'cover' });
       }
     },
   },
