@@ -1,24 +1,15 @@
-# rtw
+# :runner: :earth_asia: :runner: :earth_americas: :runner: :earth_africa:
 
-## Project setup
-```
-yarn install
-```
+## DEMO
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+https://o-p.github.io/rtw/
 
-### Compiles and minifies for production
-```
-yarn build
-```
 
-### Lints and fixes files
-```
-yarn lint
-```
+### Local Testing
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+```bash
+$ git clone git@github.com:o-p/rtw.git
+$ cd rtw
+$ yarn install
+$ yarn serve
+```
